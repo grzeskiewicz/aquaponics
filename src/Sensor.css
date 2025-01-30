@@ -1,0 +1,39 @@
+.Sensor{
+    display: flex;
+    flex-flow:row nowrap;
+    }
+    
+  .temperaturesTable {
+    display: flex;
+    flex-flow:column;
+    flex:0 10%;
+  }
+  
+  .temperaturesTable > .head{
+  display: flex;
+  flex-flow:row nowrap;
+
+  }
+  
+  .head > div{
+    border: 1px solid black;
+    flex:0 50%;
+    text-align: center;
+  }
+  
+  
+  .temperatureRecord {
+    display: flex;
+    flex-flow:row nowrap;
+  }
+  
+  .temperatureRecord > div{
+  border:1px solid black;
+  flex:0 50%;
+  text-align: center;
+  }
+
+  
+  
+  
+  

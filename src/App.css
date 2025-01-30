@@ -1,38 +1,19 @@
-.App {
-  text-align: center;
+.App{
+display: flex;
+flex-flow:column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App header{
+flex:0 5vh;
+border-bottom: 1px solid black;
+margin-bottom:0.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App header div{
+    margin-left:1rem;
+    margin-top:1rem;
+    font-weight: bold;
 }
+.App .Sensor{
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
