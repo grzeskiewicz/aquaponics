@@ -135,7 +135,7 @@ class Sensor extends React.Component {
           </div>
           {records}
         </div>
-        {this.state.sensorReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura", curve: "linear" }]} width={1000} height={600} /> : ""}
+        {this.state.sensorReadsToday !== "" ? <LineChart className="chart" xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura", curve: "linear" }]} width={1000} height={600} /> : ""}
       </div>
     );
   }
