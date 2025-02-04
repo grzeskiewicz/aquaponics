@@ -1,4 +1,4 @@
-export const API_URL='http://farmabracia.pl:3001';
+export const API_URL='http://192.168.1.3:3001';
 //export const API_URL='http://localhost:3001';
 export const headers = new Headers({
     'Accept': 'application/json',
