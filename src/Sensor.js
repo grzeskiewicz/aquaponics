@@ -12,12 +12,14 @@ class Sensor extends React.Component {
       isDisabled: false,
       info: "",
       sensorReadsToday: "",
+      showTempTable:false,
     };
 
     this.getSocketInfo = this.getSocketInfo.bind(this);
     this.turnSocketON = this.turnSocketON.bind(this);
     this.turnSocketOFF = this.turnSocketOFF.bind(this);
     this.getSensorReadsToday = this.getSensorReadsToday.bind(this);
+    this.toggleShowTempTable=this.toggleShowTempTable.bind(this);
   }
 
   componentDidMount() {
@@ -103,6 +105,18 @@ class Sensor extends React.Component {
 
   everyNth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
 
+  toggleShowTempTable() {this.setState({showTempTable:!this.state.showTempTable})}
+
+
+/*        <div className="SensorInfoWrapper">
+          <fieldset className="SensorInfo">
+            <legend>{this.props.name}</legend>
+            <p>SONOFF POWER STATUS: {this.state.info !== "" && this.state.info.DeviceName !== "" ? "ON" : "OFF"}</p>
+            <button onClick={this.turnSocketOFF}>OFF</button>
+            <button onClick={this.turnSocketON}>ON</button>
+          </fieldset>
+        </div>*/
+
   render() {
     let records;
     let sensorReadsToday, x, y;
@@ -119,23 +133,15 @@ class Sensor extends React.Component {
 
     return (
       <div className="Sensor">
-        <div className="SensorInfoWrapper">
-          <fieldset className="SensorInfo">
-            <legend>{this.props.name}</legend>
-            <p>SONOFF POWER STATUS: {this.state.info !== "" && this.state.info.DeviceName !== "" ? "ON" : "OFF"}</p>
-            <button onClick={this.turnSocketOFF}>OFF</button>
-            <button onClick={this.turnSocketON}>ON</button>
-          </fieldset>
-        </div>
-
         <div className="temperaturesTable">
+          <button onClick={this.toggleShowTempTable}>{this.state.showTempTable ? "Zwiń":"Pokaż" }</button>
           <div className="head">
             <div>Czas</div>
             <div>Temp.[&deg;C]</div>
           </div>
-          {records}
+          {this.state.showTempTable ? records:''}
         </div>
-        {this.state.sensorReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura", curve: "linear" }]} width={1000} height={600} /> : ""}
+        {this.state.sensorReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura wody", curve: "linear" }]} width={1000} height={600} /> : ""}
       </div>
     );
   }

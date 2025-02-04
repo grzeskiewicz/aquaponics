@@ -11,9 +11,11 @@ class Govee extends React.Component {
       isDisabled: false,
       info: "",
       goveeReadsToday: "",
+      showGoveeTable:false
     };
 
     this.getGoveeReadsToday = this.getGoveeReadsToday.bind(this);
+    this.toggleShowGoveeTable=this.toggleShowGoveeTable.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +53,9 @@ class Govee extends React.Component {
 
   everyNth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
 
+  toggleShowGoveeTable() {this.setState({showGoveeTable:!this.state.showGoveeTable})}
+
+
   render() {
     let records;
     let goveeReadsToday, x, y,yW;
@@ -72,14 +77,15 @@ class Govee extends React.Component {
         </div>
 
         <div className="goveeTable">
+        <button onClick={this.toggleShowGoveeTable}>{this.state.showGoveeTable ? "Zwiń":"Pokaż" }</button>
           <div className="head">
             <div>Czas</div>
             <div>Temp.[&deg;C]</div>
             <div>Wilgotność</div>
           </div>
-          {records}
+          {this.state.showGoveeTable ? records: ''}
         </div>
-        {this.state.goveeReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura", curve: "linear" }]} width={1000} height={600} /> : ""}
+        {this.state.goveeReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura szklarnia", curve: "linear" }]} width={1000} height={600} /> : ""}
         {this.state.goveeReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: yW, label: "Wilgotność", curve: "linear" }]} width={1000} height={600} /> : ""}
 
       </div>
