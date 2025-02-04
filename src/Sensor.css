@@ -1,15 +1,15 @@
-.Sensor{
+.Sensor,.Govee{
     display: flex;
     flex-flow:row nowrap;
     }
     
-  .temperaturesTable {
+  .temperaturesTable, .goveeTable{
     display: flex;
     flex-flow:column;
     flex:0 10%;
   }
   
-  .temperaturesTable > .head{
+  .temperaturesTable > .head, .goveeTable > .head{
   display: flex;
   flex-flow:row nowrap;
 
@@ -22,12 +22,12 @@
   }
   
   
-  .temperatureRecord {
+  .temperatureRecord, .goveeRecord{
     display: flex;
     flex-flow:row nowrap;
   }
   
-  .temperatureRecord > div{
+  .temperatureRecord > div, .goveeRecord > div{
   border:1px solid black;
   flex:0 50%;
   text-align: center;
@@ -35,7 +35,7 @@
 
   
   @media screen and (max-width: 500px)  {
-.Sensor{
+.Sensor,.Govee{
     flex-flow:column;
     flex-direction: column-reverse;
 }

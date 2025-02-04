@@ -71,7 +71,7 @@ class Govee extends React.Component {
         <div className="GoveeInfoWrapper">
         </div>
 
-        <div className="temperaturesTable">
+        <div className="goveeTable">
           <div className="head">
             <div>Czas</div>
             <div>Temp.[&deg;C]</div>
