@@ -1,4 +1,6 @@
 export const API_URL='http://192.168.1.3:3001';
+export const API_URL2='http://farmabracia.pl:3001';
+
 //export const API_URL='http://localhost:3001';
 export const headers = new Headers({
     'Accept': 'application/json',
@@ -13,6 +15,24 @@ export function request(url, method, dataset) {
         mode: 'cors',
         body: JSON.stringify(dataset)
     });
+}
+
+export async function fetchWithFallback(url1, url2) {
+  try {
+      const response = await fetch(url1);
+      if (!response.ok) throw new Error(`Failed with ${response.status}`);
+      return await response.json();
+  } catch (error) {
+      console.warn(`First IP failed: ${error.message}, trying second IP...`);
+      try {
+          const response = await fetch(url2);
+          if (!response.ok) throw new Error(`Failed with ${response.status}`);
+          return await response.json();
+      } catch (error) {
+          console.error(`Both IPs failed: ${error.message}`);
+          throw error; // Rethrow if both fail
+      }
+  }
 }
 
 

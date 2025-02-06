@@ -1,7 +1,7 @@
 import "./Sensor.css";
 import React from "react";
 import moment from "moment";
-import { pingCheck, request, API_URL } from "./APIConnection";
+import { pingCheck, request, API_URL,API_URL2,fetchWithFallback } from "./APIConnection";
 import { LineChart } from "@mui/x-charts";
 
 class Sensor extends React.Component {
@@ -79,13 +79,14 @@ class Sensor extends React.Component {
   }
 
   getSensorReadsToday() {
-    fetch(request(`${API_URL}/getsensorreadstoday`, "GET"))
-      .then((res) => res.json())
+    fetchWithFallback(request(`${API_URL}/getsensorreadstoday`,"GET"), request(`${API_URL2}/getsensorreadstoday`,"GET"))
+     // .then((res) => res.json())
       .then((result) => {
         console.log(result);
         this.setState({ sensorReadsToday: result });
       })
       .catch((error) => {
+        console.log(error)
         console.log("Problem z pobraniem danych z db!");
       });
   }
@@ -141,7 +142,7 @@ class Sensor extends React.Component {
           </div>
           {this.state.showTempTable ? records:''}
         </div>
-        {this.state.sensorReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura wody", curve: "linear" }]} width={1000} height={600} /> : ""}
+        {this.state.sensorReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura wody", curve: "linear", color:"#04Ade2" }]} width={1000} height={600} /> : ""}
       </div>
     );
   }

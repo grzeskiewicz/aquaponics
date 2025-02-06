@@ -1,7 +1,7 @@
 import "./Sensor.css";
 import React from "react";
 import moment from "moment";
-import { request, API_URL } from "./APIConnection";
+import { request, API_URL,API_URL2,fetchWithFallback } from "./APIConnection";
 import { LineChart } from "@mui/x-charts";
 
 class Govee extends React.Component {
@@ -25,13 +25,14 @@ class Govee extends React.Component {
 
 
   getGoveeReadsToday() {
-    fetch(request(`${API_URL}/getgoveereadstoday`, "GET"))
-      .then((res) => res.json())
+    fetchWithFallback(request(`${API_URL}/getgoveereadstoday`, "GET"),request(`${API_URL2}/getgoveereadstoday`, "GET"))
+     // .then((res) => res.json())
       .then((result) => {
         console.log(result);
         this.setState({ goveeReadsToday: result });
       })
       .catch((error) => {
+        console.log(error);
         console.log("Problem z pobraniem danych z db!");
       });
   }
@@ -85,8 +86,8 @@ class Govee extends React.Component {
           </div>
           {this.state.showGoveeTable ? records: ''}
         </div>
-        {this.state.goveeReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura szklarnia", curve: "linear" }]} width={1000} height={600} /> : ""}
-        {this.state.goveeReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: yW, label: "Wilgotność", curve: "linear" }]} width={1000} height={600} /> : ""}
+        {this.state.goveeReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: y, label: "Temperatura szklarnia", curve: "linear", color: "lightblue" }]} width={1000} height={600} /> : ""}
+        {this.state.goveeReadsToday !== "" ? <LineChart xAxis={[{ scaleType: "point", data: x, label: "Czas" }]} series={[{ data: yW, label: "Wilgotność", curve: "linear", color:"lightpink" }]} width={1000} height={600} /> : ""}
 
       </div>
     );
