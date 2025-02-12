@@ -29,7 +29,7 @@ class Sensor extends React.Component {
 
   turnSocketON() {
     if (window.confirm("Włączyć gniazdo?")) {
-      fetch(request(`${API_URL}/turnon`, "POST", { ip: this.props.socketIP }))
+      fetch(request(`${API_URL2}/turnon`, "POST", { ip: this.props.socketIP }))
         .then((res) => res.json())
         .then((result) => {
           setTimeout(() => {
@@ -46,7 +46,7 @@ class Sensor extends React.Component {
 
   turnSocketOFF() {
     if (window.confirm("Wyłączyć gniazdo?")) {
-      fetch(request(`${API_URL}/turnoff`, "POST", { ip: this.props.socketIP }))
+      fetch(request(`${API_URL2}/turnoff`, "POST", { ip: this.props.socketIP }))
         .then((res) => res.json())
         .then((result) => {
           setTimeout(() => {
@@ -62,7 +62,7 @@ class Sensor extends React.Component {
   }
 
   getSocketInfo() {
-    fetch(request(`${API_URL}/getsocketinfo`, "POST", { ip: this.props.socketIP }))
+    fetch(request(`${API_URL2}/getsocketinfo`, "POST", { ip: this.props.socketIP }))
       .then((res) => res.json())
       .then((result) => {
         //  console.log(result.data.Status);
